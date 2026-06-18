@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pamir 2025 – Checklist</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --dust:   #C8A96E;
+    --rock:   #2A2520;
+    --sky:    #4A7FA5;
+    --snow:   #F0EDE8;
+    --shadow: #1A1512;
+    --mid:    #6B6258;
+    --done:   #5A8A5A;
+    --davide: #4A7FA5;
+    --maie:   #A5664A;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--rock);
+    color: var(--snow);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── USER SELECTOR SCREEN ── */
+  #user-select-screen {
+    position: fixed;
+    inset: 0;
+    background: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    gap: 40px;
+  }
+
+  .user-select-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(32px, 6vw, 56px);
+    letter-spacing: 0.08em;
+    color: var(--dust);
+    text-align: center;
+    line-height: 1;
+  }
+
+  .user-select-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--mid);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: -28px;
+  }
+
+  .user-buttons {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .user-btn {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 0.08em;
+    padding: 20px 48px;
+    border: 2px solid;
+    border-radius: 4px;
+    cursor: pointer;
+    background: none;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .user-btn.davide {
+    color: var(--davide);
+    border-color: var(--davide);
+  }
+  .user-btn.davide:hover {
+    background: var(--davide);
+    color: var(--shadow);
+  }
+
+  .user-btn.maie {
+    color: var(--maie);
+    border-color: var(--maie);
+  }
+  .user-btn.maie:hover {
+    background: var(--maie);
+    color: var(--shadow);
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--shadow);
+    border-bottom: 2px solid var(--dust);
+    padding: 20px 32px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .header-left { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+
+  .header-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(22px, 4vw, 38px);
+    letter-spacing: 0.08em;
+    color: var(--dust);
+    line-height: 1;
+  }
+
+  .user-badge {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.06em;
+    padding: 4px 12px;
+    border-radius: 3px;
+    cursor: pointer;
+    border: none;
+    transition: opacity 0.2s;
+  }
+  .user-badge:hover { opacity: 0.75; }
+  .user-badge.davide { background: var(--davide); color: var(--shadow); }
+  .user-badge.maie   { background: var(--maie);   color: var(--shadow); }
+
+  .progress-block { text-align: right; }
+
+  .progress-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--mid);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .progress-bar-wrap {
+    width: 160px;
+    height: 4px;
+    background: #3A3530;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+  .progress-bar-fill.davide { background: var(--davide); }
+  .progress-bar-fill.maie   { background: var(--maie); }
+
+  .progress-count {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    color: var(--snow);
+    letter-spacing: 0.05em;
+    margin-top: 4px;
+  }
+
+  /* ── SYNC STATUS ── */
+  .sync-status {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--mid);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    border-radius: 3px;
+    background: rgba(255,255,255,0.04);
+  }
+  .sync-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--mid);
+    transition: background 0.3s;
+  }
+  .sync-dot.ok      { background: var(--done); }
+  .sync-dot.loading { background: var(--dust); animation: pulse 1s infinite; }
+  .sync-dot.error   { background: #A05050; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  /* ── TABS ── */
+  .tabs {
+    display: flex;
+    padding: 0 32px;
+    background: var(--shadow);
+    border-bottom: 1px solid #3A3530;
+  }
+
+  .tab-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid);
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .tab-btn.active { color: var(--dust); border-bottom-color: var(--dust); }
+  .tab-btn:hover:not(.active) { color: var(--snow); }
+
+  /* ── MAIN ── */
+  main { max-width: 900px; margin: 0 auto; padding: 32px 24px 64px; }
+
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── SECTION ── */
+  .section { margin-bottom: 36px; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #3A3530;
+  }
+
+  .section-icon { font-size: 18px; line-height: 1; }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.06em;
+    color: var(--dust);
+  }
+
+  .section-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--mid);
+    margin-left: auto;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── ITEMS ── */
+  .item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 9px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.15s;
+    user-select: none;
+    position: relative;
+  }
+  .item:hover { background: rgba(255,255,255,0.04); }
+  .item.checked { opacity: 0.45; }
+  .item.checked .item-text { text-decoration: line-through; color: var(--mid); }
+  .item.saving { pointer-events: none; }
+
+  .checkbox {
+    width: 16px; height: 16px;
+    border: 1.5px solid var(--mid);
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .item.checked .checkbox { background: var(--done); border-color: var(--done); }
+
+  .checkmark { display: none; color: white; font-size: 10px; font-weight: 700; line-height: 1; }
+  .item.checked .checkmark { display: block; }
+
+  .item-text { color: var(--snow); line-height: 1.5; }
+  .item-note { font-size: 12px; color: var(--mid); margin-top: 2px; }
+
+  /* ── PRIORITY ── */
+  .priority {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+  .priority.urgent { background: #7A2020; color: #FFB3B3; }
+  .priority.high   { background: #6B4A10; color: var(--dust); }
+  .priority.normal { background: #2A3A2A; color: #90C090; }
+
+  /* ── WEEK LABEL ── */
+  .week-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sky);
+    margin: 28px 0 8px;
+    padding-left: 10px;
+    border-left: 3px solid var(--sky);
+  }
+
+  /* ── RESET ── */
+  .reset-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: none;
+    border: 1px solid #3A3530;
+    color: var(--mid);
+    padding: 6px 14px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-bottom: 24px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .reset-btn:hover { border-color: var(--mid); color: var(--snow); }
+
+  /* ── LOADING OVERLAY ── */
+  #loading-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 998;
+    gap: 16px;
+  }
+  .loading-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--mid);
+    text-transform: uppercase;
+  }
+  .loading-spinner {
+    width: 32px; height: 32px;
+    border: 2px solid #3A3530;
+    border-top-color: var(--dust);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── ALTITUDE BAR ── */
+  .altitude-bar {
+    position: fixed;
+    right: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--sky) 0%, var(--dust) 50%, var(--shadow) 100%);
+    opacity: 0.3;
+  }
+
+  /* ── OTHER USER INDICATOR ── */
+  .other-user-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    font-size: 12px;
+    color: var(--mid);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+  }
+  .other-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .other-dot.davide { background: var(--davide); }
+  .other-dot.maie   { background: var(--maie); }
+</style>
+</head>
+<body>
+
+<div class="altitude-bar"></div>
+
+<!-- USER SELECT -->
+<div id="user-select-screen">
+  <div>
+    <div class="user-select-title">Pamir Highway 2025</div>
+    <div class="user-select-sub">Chi sei?</div>
+  </div>
+  <div class="user-buttons">
+    <button class="user-btn davide" onclick="selectUser('Davide')">Davide</button>
+    <button class="user-btn maie"   onclick="selectUser('Maie')">Maie</button>
+  </div>
+</div>
+
+<!-- LOADING -->
+<div id="loading-overlay" style="display:none">
+  <div class="loading-spinner"></div>
+  <div class="loading-text">Caricamento dal database…</div>
+</div>
+
+<!-- APP -->
+<div id="app" style="display:none">
+
+<header>
+  <div class="header-left">
+    <div>
+      <div class="header-title">Pamir Highway — Luglio 2025</div>
+    </div>
+    <button id="user-badge" class="user-badge" onclick="switchUser()" title="Cambia utente"></button>
+    <div class="sync-status">
+      <div class="sync-dot" id="syncDot"></div>
+      <span id="syncText">—</span>
+    </div>
+  </div>
+  <div class="progress-block">
+    <div class="progress-label">Completato</div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progressBar" style="width:0%"></div>
+    </div>
+    <div class="progress-count" id="progressCount">0 / 0</div>
+  </div>
+</header>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('portare', event)">🎒 Cosa portare</button>
+  <button class="tab-btn" onclick="switchTab('fare', event)">✅ Cosa fare</button>
+</div>
+
+<main>
+
+  <!-- PANEL: COSA PORTARE -->
+  <div class="panel active" id="panel-portare">
+    <button class="reset-btn" onclick="resetPanel('portare')">↺ Azzera spunte</button>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">🔧</span>
+        <span class="section-title">Moto e ricambi (XT 600)</span>
+        <span class="section-count" id="count-moto"></span>
+      </div>
+      <div id="group-moto">
+        <div class="item" data-id="moto-01" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Candele NGK DR8EA × 2</div><div class="item-note">L'XT le brucia spesso in quota</div></div></div>
+        <div class="item" data-id="moto-02" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Maglie rapide catena 520 × 3</div><div class="item-note">Punto debole numero uno</div></div></div>
+        <div class="item" data-id="moto-03" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Kit riparazione pneumatici</div><div class="item-note">Leve + toppe + CO2 o mini pompetta</div></div></div>
+        <div class="item" data-id="moto-04" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Cavo freno spare</div></div></div>
+        <div class="item" data-id="moto-05" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Cavo frizione spare</div></div></div>
+        <div class="item" data-id="moto-06" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Leva freno spare</div></div></div>
+        <div class="item" data-id="moto-07" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Leva frizione spare</div></div></div>
+        <div class="item" data-id="moto-08" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Fusibili assortiti</div><div class="item-note">5A · 10A · 15A · 20A</div></div></div>
+        <div class="item" data-id="moto-09" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Bulbo faro H4 × 1</div></div></div>
+        <div class="item" data-id="moto-10" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Nastro americano + fascette stringicavo</div></div></div>
+        <div class="item" data-id="moto-11" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Filo di ferro + Loctite 243</div></div></div>
+        <div class="item" data-id="moto-12" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Lubrificante catena</div></div></div>
+        <div class="item" data-id="moto-13" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Tanica carburante extra (20L min)</div><div class="item-note">Tra Murghab e tratti remoti la benzina sparisce</div></div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">🎽</span>
+        <span class="section-title">Abbigliamento moto</span>
+        <span class="section-count" id="count-abiti"></span>
+      </div>
+      <div id="group-abiti">
+        <div class="item" data-id="abiti-01" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Giacca con protezioni CE2 + strato termico</div></div></div>
+        <div class="item" data-id="abiti-02" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Pantaloni moto con protezioni</div></div></div>
+        <div class="item" data-id="abiti-03" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Stivali moto impermeabili</div></div></div>
+        <div class="item" data-id="abiti-04" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Guanti estivi</div></div></div>
+        <div class="item" data-id="abiti-05" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Guanti invernali</div><div class="item-note">Anche in luglio al passo fa freddo</div></div></div>
+        <div class="item" data-id="abiti-06" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Sottocasco termico + balaclava</div></div></div>
+        <div class="item" data-id="abiti-07" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Goggles / occhiali antipolvere</div><div class="item-note">La polvere è ovunque sul Pamir</div></div></div>
+        <div class="item" data-id="abiti-08" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Gilet catarifrangente</div><div class="item-note">Obbligatorio in alcuni tratti</div></div></div>
+        <div class="item" data-id="abiti-09" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Cambio vestiti (2-3 set leggeri)</div></div></div>
+        <div class="item" data-id="abiti-10" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Pile/felpa pesante</div></div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">⛺</span>
+        <span class="section-title">Campeggio</span>
+        <span class="section-count" id="count-camp"></span>
+      </div>
+      <div id="group-camp">
+        <div class="item" data-id="camp-01" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Tenda 2 posti (3-4 stagioni)</div><div class="item-note">Il vento in quota è brutale</div></div></div>
+        <div class="item" data-id="camp-02" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Sacco a pelo fino a −10°C</div></div></div>
+        <div class="item" data-id="camp-03" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Materassino isolante (R-value alto)</div></div></div>
+        <div class="item" data-id="camp-04" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Fornello (gas o alcool)</div><div class="item-note">Cartucce gas disponibili a Osh e Murghab</div></div></div>
+        <div class="item" data-id="camp-05" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Pentolino + posate leggere</div></div></div>
+        <div class="item" data-id="camp-06" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Accendino × 2 + fiammiferi impermeabili</div></div></div>
+        <div class="item" data-id="camp-07" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Filtro acqua (Sawyer Squeeze o Katadyn)</div></div></div>
+        <div class="item" data-id="camp-08" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Borracce 2L min a testa</div></div></div>
+        <div class="item" data-id="camp-09" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Pastiglie purificanti acqua (backup)</div></div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">🏥</span>
+        <span class="section-title">Pronto soccorso e farmacia</span>
+        <span class="section-count" id="count-salute"></span>
+      </div>
+      <div id="group-salute">
+        <div class="item" data-id="sal-01" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Kit pronto soccorso completo</div><div class="item-note">Cerotti, garze, bende, disinfettante</div></div></div>
+        <div class="item" data-id="sal-02" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Acetazolamide (Diamox)</div><div class="item-note">Fondamentale per il mal di montagna — serve ricetta</div></div></div>
+        <div class="item" data-id="sal-03" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Antibiotici ad ampio spettro</div><div class="item-note">Farsi prescrivere prima della partenza</div></div></div>
+        <div class="item" data-id="sal-04" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Antidolorifici (ibuprofene + paracetamolo)</div></div></div>
+        <div class="item" data-id="sal-05" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Antidiarroici (Loperamide)</div></div></div>
+        <div class="item" data-id="sal-06" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Antistaminico</div></div></div>
+        <div class="item" data-id="sal-07" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Pomata antibiotica</div></div></div>
+        <div class="item" data-id="sal-08" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Protezione solare SPF50+ + burrocacao</div><div class="item-note">UV intensi ad alta quota</div></div></div>
+        <div class="item" data-id="sal-09" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Termometro + guanti monouso</div></div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">🗺️</span>
+        <span class="section-title">Navigazione e documenti</span>
+        <span class="section-count" id="count-nav"></span>
+      </div>
+      <div id="group-nav">
+        <div class="item" data-id="nav-01" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Passaporto + fotocopie</div></div></div>
+        <div class="item" data-id="nav-02" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Patente italiana + patente internazionale</div></div></div>
+        <div class="item" data-id="nav-03" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">eVisa Tajikistan + GBAO Permit (stampati)</div></div></div>
+        <div class="item" data-id="nav-04" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Documenti moto + lettera autorizzazione noleggiatore</div></div></div>
+        <div class="item" data-id="nav-05" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">USD cash (200$ in banconote nuove e piccole)</div><div class="item-note">Bancomat assenti dopo Osh</div></div></div>
+        <div class="item" data-id="nav-06" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Smartphone con OsmAnd + mappe offline</div><div class="item-note">Kyrgyzstan + Tajikistan scaricati prima di partire</div></div></div>
+        <div class="item" data-id="nav-07" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">iOverlander (punti benzina, lodge, campeggi)</div></div></div>
+        <div class="item" data-id="nav-08" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Supporto manubrio impermeabile per smartphone</div><div class="item-note">Ram Mount o Quadlock</div></div></div>
+        <div class="item" data-id="nav-09" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Garmin inReach Mini (o simile)</div><div class="item-note">SOS satellitare — quasi obbligatorio unsupported</div></div></div>
+        <div class="item" data-id="nav-10" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Numeri utili stampati (ambasciata, soccorso)</div></div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">🔋</span>
+        <span class="section-title">Elettronica</span>
+        <span class="section-count" id="count-tech"></span>
+      </div>
+      <div id="group-tech">
+        <div class="item" data-id="tech-01" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">PowerBank ≥ 20.000 mAh</div></div></div>
+        <div class="item" data-id="tech-02" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Caricatore USB da manubrio</div></div></div>
+        <div class="item" data-id="tech-03" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Pannello solare flessibile</div><div class="item-note">Utile per ricariche nei campi lunghi</div></div></div>
+        <div class="item" data-id="tech-04" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Action cam + supporto manubrio</div></div></div>
+        <div class="item" data-id="tech-05" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Frontale + batterie di scorta</div></div></div>
+        <div class="item" data-id="tech-06" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">SIM locale (Beeline/O! per Kyrgyzstan, Tcell per Tajikistan)</div></div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">🍱</span>
+        <span class="section-title">Cibo e acqua</span>
+        <span class="section-count" id="count-cibo"></span>
+      </div>
+      <div id="group-cibo">
+        <div class="item" data-id="cibo-01" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Razioni liofilizzate per 3-4 giorni</div><div class="item-note">Scorta per i tratti più remoti</div></div></div>
+        <div class="item" data-id="cibo-02" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Barrette energetiche + frutta secca</div></div></div>
+        <div class="item" data-id="cibo-03" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Sale + zucchero per reintegro</div></div></div>
+      </div>
+    </div>
+  </div><!-- end panel-portare -->
+
+  <!-- PANEL: COSA FARE -->
+  <div class="panel" id="panel-fare">
+    <button class="reset-btn" onclick="resetPanel('fare')">↺ Azzera spunte</button>
+
+    <div class="week-label">Settimana 1 — Burocrazia urgente</div>
+    <div class="section">
+      <div id="group-todo1">
+        <div class="item" data-id="todo-01" onclick="toggle(this)">
+          <div class="checkbox"><span class="checkmark">✓</span></div>
+          <span class="priority urgent">Urgente</span>
+          <div><div class="item-text">Richiedere eVisa Tajikistan + GBAO Permit</div><div class="item-note">Su evisa.tj — richiede 5-10 giorni lavorativi · costa ~70$</div></div>
+        </div>
+        <div class="item" data-id="todo-02" onclick="toggle(this)">
+          <div class="checkbox"><span class="checkmark">✓</span></div>
+          <span class="priority urgent">Urgente</span>
+          <div><div class="item-text">Fare la patente internazionale (IDP)</div><div class="item-note">Ufficio ACI · ~15€ · rilasciata seduta stante</div></div>
+        </div>
+        <div class="item" data-id="todo-03" onclick="toggle(this)">
+          <div class="checkbox"><span class="checkmark">✓</span></div>
+          <span class="priority urgent">Urgente</span>
+          <div><div class="item-text">Prenotare appuntamento al centro vaccinazioni</div><div class="item-note">Alcune vaccinazioni richiedono più dosi nel tempo</div></div>
+        </div>
+        <div class="item" data-id="todo-04" onclick="toggle(this)">
+          <div class="checkbox"><span class="checkmark">✓</span></div>
+          <span class="priority high">Alta</span>
+          <div><div class="item-text">Contattare il noleggiatore e fare le domande chiave</div><div class="item-note">Candela, passo catena, attrezzi inclusi, camera o tubeless, assicurazione Tajikistan</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-label">Settimana 2 — Salute e sicurezza</div>
+    <div class="section">
+      <div id="group-todo2">
+        <div class="item" data-id="todo-05" onclick="toggle(this)">
+          <div class="checkbox"><span class="checkmark">✓</span></div>
+          <span class="priority high">Alta</span>
+          <div><div class="item-text">Visita travel medicine + vaccinazioni</div><div class="item-note">Epatite A/B, tifoide, tetano, rabbia (pre-esposizione per cani randagi)</div></div>
+        </div>
+        <div class="item" data-id="todo-06" onclick="toggle(this)">
+          <div class="checkbox"><span class="checkmark">✓</span></div>
+          <span class="priority high">Alta</span>
+          <div><div class="item-text">Ottenere Diamox (Acetazolamide) con ricetta</div><div class="item-note">Fondamentale per il mal di montagna a 4.000m+</div></div>
+        </div>
+        <div class="item" data-id="todo-07" onclick="toggle(this)">
+          <div class="checkbox"><span class="checkmark">✓</span></div>
+          <span class="priority high">Alta</span>
+          <div><div class="item-text">Attivare assicurazione sanitaria con copertura rimpatrio</div><div class="item-note">Verificare che copra alta quota e attività moto</div></div>
+        </div>
+        <div class="item" data-id="todo-08" onclick="toggle(this)">
+          <div class="checkbox"><span class="checkmark">✓</span></div>
+          <span class="priority high">Alta</span>
+          <div><div class="item-text">Farsi prescrivere antibiotici ad ampio spettro</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-label">Settimana 3 — Equipment e navigazione</div>
+    <div class="section">
+      <div id="group-todo3">
+        <div class="item" data-id="todo-09" onclick="toggle(this)">
+          <div class="checkbox"><span class="checkmark">✓</span></div>
+          <span class="priority high">Alta</span>
+          <div><div class="item-text">Comprare i ricambi specifici XT 600</div><div class="item-note">Candele NGK DR8EA, maglie catena 520, cavi, leve</div></div>
+        </div>
+        <div class="item" data-id="todo-10" onclick="toggle(this)">
+          <div class="checkbox"><span class="checkmark">✓</span></div>
+          <span class="priority high">Alta</span>
+          <div><div class="item-text">Scaricare OsmAnd + mappe offline</div><div class="item-note">Kyrgyzstan e Tajikistan — testare che funzionino offline</div></div>
+        </div>
+        <div class="item" data-id="todo-11" onclick="toggle(this)">
+          <div class="checkbox"><span class="checkmark">✓</span></div>
+          <span class="priority normal">Normale</span>
+          <div><div class="item-text">Scaricare iOverlander e salvare punti chiave</div><div class="item-note">Benzina, lodge, campeggi, meccanici lungo la M41</div></div>
+        </div>
+        <div class="item" data-id="todo-12" onclick="toggle(this)">
+          <div class="checkbox"><span class="checkmark">✓</span></div>
+          <span class="priority normal">Normale</span>
+          <div><div class="item-text">Procurarsi/attivare Garmin inReach Mini</div><div class="item-note">~350€ + abbonamento mensile ~15-35€</div></div>
+        </div>
+        <div class="item" data-id="todo-13" onclick="toggle(this)">
+          <div class="checkbox"><span class="checkmark">✓</span></div>
+          <span class="priority normal">Normale</span>
+          <div><div class="item-text">Comprare supporto manubrio impermeabile per smartphone</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-label">Settimana 4 — Logistica finale</div>
+    <div class="section">
+      <div id="group-todo4">
+        <div class="item" data-id="todo-14" onclick="toggle(this)">
+          <div class="checkbox"><span class="checkmark">✓</span></div>
+          <span class="priority high">Alta</span>
+          <div><div class="item-text">Cambiare USD cash</div><div class="item-note">Banconote nuove, non strappate — le vecchie non vengono accettate</div></div>
+        </div>
+        <div class="item" data-id="todo-15" onclick="toggle(this)">
+          <div class="checkbox"><span class="checkmark">✓</span></div>
+          <span class="priority high">Alta</span>
+          <div><div class="item-text">Definire itinerario con tappe e distanze realistiche</div><div class="item-note">15 giorni: scegliere bene tra M41 e deviazioni Wakhan</div></div>
+        </div>
+        <div class="item" data-id="todo-16" onclick="toggle(this)">
+          <div class="checkbox"><span class="checkmark">✓</span></div>
+          <span class="priority normal">Normale</span>
+          <div><div class="item-text">Lasciare itinerario e contatti a qualcuno in Italia</div><div class="item-note">Con date check-in previste</div></div>
+        </div>
+        <div class="item" data-id="todo-17" onclick="toggle(this)">
+          <div class="checkbox"><span class="checkmark">✓</span></div>
+          <span class="priority normal">Normale</span>
+          <div><div class="item-text">Acquistare SIM locale o verificare piano roaming</div></div>
+        </div>
+        <div class="item" data-id="todo-18" onclick="toggle(this)">
+          <div class="checkbox"><span class="checkmark">✓</span></div>
+          <span class="priority normal">Normale</span>
+          <div><div class="item-text">Giro di prova 30-40km con moto a pieno carico</div><div class="item-note">Da fare ad Osh prima di partire</div></div>
+        </div>
+        <div class="item" data-id="todo-19" onclick="toggle(this)">
+          <div class="checkbox"><span class="checkmark">✓</span></div>
+          <span class="priority normal">Normale</span>
+          <div><div class="item-text">Caricare copie digitali di tutti i documenti su cloud</div></div>
+        </div>
+      </div>
+    </div>
+  </div><!-- end panel-fare -->
+
+</main>
+</div><!-- end #app -->
+
+<script>
+  const SUPABASE_URL = 'https://eslbhgdoipdekzvqksct.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_x31t1X8EoE44GQiJFn_9Fw_OgwCMqZv';
+
+  let currentUser = null;
+  let otherUser = null;
+  let debounceTimers = {};
+
+  // ── SUPABASE HELPERS ──
+  async function sbFetch(path, options = {}) {
+    const res = await fetch(SUPABASE_URL + path, {
+      ...options,
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal',
+        ...(options.headers || {})
+      }
+    });
+    return res;
+  }
+
+  async function loadChecked(userName) {
+    const res = await sbFetch(`/rest/v1/checklist_items?user_name=eq.${encodeURIComponent(userName)}&checked=eq.true&select=id`);
+    if (!res.ok) throw new Error('Load failed');
+    return await res.json();
+  }
+
+  async function upsertItem(id, userName, checked) {
+    const res = await sbFetch('/rest/v1/checklist_items', {
+      method: 'POST',
+      headers: { 'Prefer': 'resolution=merge-duplicates,return=minimal' },
+      body: JSON.stringify({ id, user_name: userName, checked, updated_at: new Date().toISOString() })
+    });
+    if (!res.ok) throw new Error('Save failed');
+  }
+
+  // ── SYNC STATUS ──
+  function setSyncStatus(state, text) {
+    const dot = document.getElementById('syncDot');
+    const txt = document.getElementById('syncText');
+    dot.className = 'sync-dot ' + state;
+    txt.textContent = text;
+  }
+
+  // ── USER SELECTION ──
+  async function selectUser(name) {
+    currentUser = name;
+    otherUser = name === 'Davide' ? 'Maie' : 'Davide';
+
+    document.getElementById('user-select-screen').style.display = 'none';
+    document.getElementById('loading-overlay').style.display = 'flex';
+
+    try {
+      // Load current user's state
+      const rows = await loadChecked(currentUser);
+      const checkedIds = new Set(rows.map(r => r.id));
+
+      document.querySelectorAll('.item[data-id]').forEach(el => {
+        if (checkedIds.has(el.dataset.id)) {
+          el.classList.add('checked');
+        } else {
+          el.classList.remove('checked');
+        }
+      });
+
+      // Update UI
+      const badge = document.getElementById('user-badge');
+      badge.textContent = currentUser;
+      badge.className = 'user-badge ' + currentUser.toLowerCase();
+
+      const bar = document.getElementById('progressBar');
+      bar.className = 'progress-bar-fill ' + currentUser.toLowerCase();
+
+      document.getElementById('loading-overlay').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+
+      setSyncStatus('ok', 'Sincronizzato');
+      updateProgress();
+
+    } catch(e) {
+      document.getElementById('loading-overlay').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      setSyncStatus('error', 'Errore DB');
+    }
+  }
+
+  function switchUser() {
+    document.getElementById('app').style.display = 'none';
+    // Reset all checks
+    document.querySelectorAll('.item').forEach(el => el.classList.remove('checked'));
+    document.getElementById('user-select-screen').style.display = 'flex';
+    currentUser = null;
+  }
+
+  // ── TOGGLE ──
+  async function toggle(el) {
+    if (el.classList.contains('saving')) return;
+    el.classList.toggle('checked');
+    updateProgress();
+
+    const id = el.dataset.id;
+    const checked = el.classList.contains('checked');
+
+    // Debounce saves per item
+    clearTimeout(debounceTimers[id]);
+    debounceTimers[id] = setTimeout(async () => {
+      setSyncStatus('loading', 'Salvataggio…');
+      try {
+        await upsertItem(id, currentUser, checked);
+        setSyncStatus('ok', 'Sincronizzato');
+      } catch(e) {
+        setSyncStatus('error', 'Errore salvataggio');
+        // Revert on error
+        el.classList.toggle('checked');
+        updateProgress();
+      }
+    }, 400);
+  }
+
+  // ── TABS ──
+  function switchTab(name, event) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + name).classList.add('active');
+    if (event && event.target) event.target.classList.add('active');
+    updateProgress();
+  }
+
+  // ── RESET ──
+  async function resetPanel(name) {
+    if (!confirm('Azzera tutte le spunte di questa tab?')) return;
+    const panel = document.getElementById('panel-' + name);
+    const items = panel.querySelectorAll('.item[data-id].checked');
+    items.forEach(el => el.classList.remove('checked'));
+    updateProgress();
+
+    setSyncStatus('loading', 'Salvataggio…');
+    try {
+      await Promise.all([...items].map(el => upsertItem(el.dataset.id, currentUser, false)));
+      setSyncStatus('ok', 'Sincronizzato');
+    } catch(e) {
+      setSyncStatus('error', 'Errore reset');
+    }
+  }
+
+  // ── PROGRESS ──
+  function updateProgress() {
+    const activePanel = document.querySelector('.panel.active');
+    const all  = activePanel.querySelectorAll('.item').length;
+    const done = activePanel.querySelectorAll('.item.checked').length;
+    const pct  = all > 0 ? (done / all * 100) : 0;
+    document.getElementById('progressBar').style.width = pct + '%';
+    document.getElementById('progressCount').textContent = done + ' / ' + all;
+
+    activePanel.querySelectorAll('[id^="group-"]').forEach(group => {
+      const gAll  = group.querySelectorAll('.item').length;
+      const gDone = group.querySelectorAll('.item.checked').length;
+      const sectionId = group.id.replace('group-', '');
+      const counter = document.getElementById('count-' + sectionId);
+      if (counter) counter.textContent = gDone + '/' + gAll;
+    });
+  }
+</script>
+</body>
+</html>
