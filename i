@@ -778,8 +778,8 @@
     `).join('');
   }
 
-  const SUPABASE_URL = null; // Key is now server-side via /api/supabase
-  const SUPABASE_KEY = null;
+  const SUPABASE_URL = 'https://eslbhgdoipdekzvqksct.supabase.co';
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVzbGJoZ2RvaXBkZWt6dnFrc2N0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE4MDEyOTMsImV4cCI6MjA5NzM3NzI5M30.e--EuMygVoWhPnRTgG-Gxv_n1_BGz-ZZR-EJKefSckk';
 
   let currentUser = null;
   let otherUser = null;
@@ -787,14 +787,15 @@
 
   // ── SUPABASE HELPERS ──
   async function sbFetch(path, options = {}) {
-    const url = '/api/supabase?path=' + encodeURIComponent(path);
-    const res = await fetch(url, {
-      method: options.method || 'GET',
+    const res = await fetch(SUPABASE_URL + path, {
+      ...options,
       headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_KEY,
         'Content-Type': 'application/json',
-        'Prefer': options.headers?.['Prefer'] || 'return=minimal',
-      },
-      body: options.body,
+        'Prefer': 'return=minimal',
+        ...(options.headers || {})
+      }
     });
     return res;
   }
@@ -919,7 +920,7 @@
     }
   }
 
-  const ORS_KEY = null; // Key is now server-side via /api/routing
+  const ORS_KEY = 'eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImJkOTcxMjIwMmU1NTQ4MmY4ZDY1MTZhYTU1MzI5Yjk3IiwiaCI6Im11cm11cjY0In0=';
 
   const waypoints = [
     { name: 'Osh',        lat: 40.5165, lng: 72.8034, day: 'G1',     tag: 'strada'  },
@@ -959,9 +960,12 @@
   async function fetchRoute(points) {
     const coords = points.map(p => [p.lng, p.lat]);
     console.log('Fetching route for', points.map(p => p.name).join(' → '));
-    const res = await fetch('/api/routing', {
+    const res = await fetch('https://api.openrouteservice.org/v2/directions/driving-car/geojson', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Authorization': ORS_KEY,
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({ coordinates: coords })
     });
     console.log('ORS response status:', res.status);
