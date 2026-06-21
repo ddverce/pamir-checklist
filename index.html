@@ -392,6 +392,78 @@
   }
   .other-dot.davide { background: var(--davide); }
   .other-dot.maie   { background: var(--maie); }
+
+  /* ── ITINERARY ── */
+  #map { width: 100%; height: 460px; border-radius: 6px; margin-bottom: 32px; border: 1px solid #3A3530; }
+
+  .itinerary-table { width: 100%; border-collapse: collapse; margin-bottom: 32px; }
+  .itinerary-table th {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--mid); text-align: left;
+    padding: 8px 12px; border-bottom: 2px solid #3A3530;
+  }
+  .itinerary-table td { padding: 10px 12px; border-bottom: 1px solid #2E2A26; vertical-align: top; font-size: 13px; }
+  .itinerary-table tr:hover td { background: rgba(255,255,255,0.03); }
+
+  .day-num { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: var(--dust); letter-spacing: 0.05em; white-space: nowrap; }
+  .day-date { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--mid); letter-spacing: 0.06em; }
+  .day-route { color: var(--snow); font-weight: 500; }
+  .day-note { font-size: 11px; color: var(--mid); margin-top: 3px; }
+  .day-km { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: var(--sky); letter-spacing: 0.05em; white-space: nowrap; }
+
+  .day-tag {
+    display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 9px;
+    letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 6px; border-radius: 2px; margin-top: 4px;
+  }
+  .tag-sosta  { background: #3A3530; color: var(--mid); }
+  .tag-pamir  { background: #2A3A4A; color: #7AAFD4; }
+  .tag-wakhan { background: #3A2A1A; color: #D4A07A; }
+  .tag-uzb    { background: #2A3A2A; color: #7AD47A; }
+  .tag-strada { background: #2A2A3A; color: #9A9AD4; }
+
+  .totale-bar {
+    display: flex; gap: 32px; flex-wrap: wrap;
+    padding: 20px 24px; background: var(--shadow);
+    border-radius: 6px; border: 1px solid #3A3530; margin-bottom: 32px;
+  }
+  .totale-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); }
+  .totale-value { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--dust); letter-spacing: 0.05em; line-height: 1.1; }
+
+  /* ── INFO ── */
+  .info-section { margin-bottom: 36px; }
+  .info-section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px; letter-spacing: 0.06em; color: var(--dust);
+    border-bottom: 1px solid #3A3530; padding-bottom: 8px; margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .info-card {
+    background: var(--shadow); border: 1px solid #3A3530;
+    border-radius: 5px; padding: 16px 18px; margin-bottom: 12px;
+  }
+  .info-card-title {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--dust); margin-bottom: 8px;
+  }
+  .info-card p { font-size: 13px; color: var(--snow); line-height: 1.7; margin-bottom: 6px; }
+  .info-card p:last-child { margin-bottom: 0; }
+  .info-card a { color: var(--sky); text-decoration: none; }
+  .info-card a:hover { text-decoration: underline; }
+  .info-tag {
+    display: inline-block; font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 2px 7px; border-radius: 2px; margin: 2px 3px 2px 0;
+  }
+  .info-tag.green  { background: #2A3A2A; color: #7AD47A; }
+  .info-tag.red    { background: #3A2020; color: #D47A7A; }
+  .info-tag.blue   { background: #2A3A4A; color: #7AAFD4; }
+  .info-tag.orange { background: #3A2A1A; color: #D4A07A; }
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 600px) { .info-grid { grid-template-columns: 1fr; } }
+  .info-stat { background: #1E1A16; border-radius: 4px; padding: 12px 14px; }
+  .info-stat-val { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--dust); letter-spacing: 0.04em; }
+  .info-stat-lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--mid); letter-spacing: 0.08em; text-transform: uppercase; }
 </style>
 </head>
 <body>
@@ -442,273 +514,270 @@
 <div class="tabs">
   <button class="tab-btn active" onclick="switchTab('portare', event)">🎒 Cosa portare</button>
   <button class="tab-btn" onclick="switchTab('fare', event)">✅ Cosa fare</button>
+  <button class="tab-btn" onclick="switchTab('itinerario', event)">🗺️ Itinerario</button>
+  <button class="tab-btn" onclick="switchTab('info', event)">📄 Info</button>
 </div>
 
 <main>
 
   <!-- PANEL: COSA PORTARE -->
   <div class="panel active" id="panel-portare">
-    <button class="reset-btn" onclick="resetPanel('portare')">↺ Azzera spunte</button>
-
-    <div class="section">
-      <div class="section-header">
-        <span class="section-icon">🔧</span>
-        <span class="section-title">Moto e ricambi (XT 600)</span>
-        <span class="section-count" id="count-moto"></span>
-      </div>
-      <div id="group-moto">
-        <div class="item" data-id="moto-01" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Candele NGK DR8EA × 2</div><div class="item-note">L'XT le brucia spesso in quota</div></div></div>
-        <div class="item" data-id="moto-02" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Maglie rapide catena 520 × 3</div><div class="item-note">Punto debole numero uno</div></div></div>
-        <div class="item" data-id="moto-03" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Kit riparazione pneumatici</div><div class="item-note">Leve + toppe + CO2 o mini pompetta</div></div></div>
-        <div class="item" data-id="moto-04" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Cavo freno spare</div></div></div>
-        <div class="item" data-id="moto-05" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Cavo frizione spare</div></div></div>
-        <div class="item" data-id="moto-06" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Leva freno spare</div></div></div>
-        <div class="item" data-id="moto-07" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Leva frizione spare</div></div></div>
-        <div class="item" data-id="moto-08" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Fusibili assortiti</div><div class="item-note">5A · 10A · 15A · 20A</div></div></div>
-        <div class="item" data-id="moto-09" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Bulbo faro H4 × 1</div></div></div>
-        <div class="item" data-id="moto-10" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Nastro americano + fascette stringicavo</div></div></div>
-        <div class="item" data-id="moto-11" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Filo di ferro + Loctite 243</div></div></div>
-        <div class="item" data-id="moto-12" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Lubrificante catena</div></div></div>
-        <div class="item" data-id="moto-13" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Tanica carburante extra (20L min)</div><div class="item-note">Tra Murghab e tratti remoti la benzina sparisce</div></div></div>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-header">
-        <span class="section-icon">🎽</span>
-        <span class="section-title">Abbigliamento moto</span>
-        <span class="section-count" id="count-abiti"></span>
-      </div>
-      <div id="group-abiti">
-        <div class="item" data-id="abiti-01" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Giacca con protezioni CE2 + strato termico</div></div></div>
-        <div class="item" data-id="abiti-02" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Pantaloni moto con protezioni</div></div></div>
-        <div class="item" data-id="abiti-03" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Stivali moto impermeabili</div></div></div>
-        <div class="item" data-id="abiti-04" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Guanti estivi</div></div></div>
-        <div class="item" data-id="abiti-05" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Guanti invernali</div><div class="item-note">Anche in luglio al passo fa freddo</div></div></div>
-        <div class="item" data-id="abiti-06" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Sottocasco termico + balaclava</div></div></div>
-        <div class="item" data-id="abiti-07" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Goggles / occhiali antipolvere</div><div class="item-note">La polvere è ovunque sul Pamir</div></div></div>
-        <div class="item" data-id="abiti-08" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Gilet catarifrangente</div><div class="item-note">Obbligatorio in alcuni tratti</div></div></div>
-        <div class="item" data-id="abiti-09" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Cambio vestiti (2-3 set leggeri)</div></div></div>
-        <div class="item" data-id="abiti-10" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Pile/felpa pesante</div></div></div>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-header">
-        <span class="section-icon">⛺</span>
-        <span class="section-title">Campeggio</span>
-        <span class="section-count" id="count-camp"></span>
-      </div>
-      <div id="group-camp">
-        <div class="item" data-id="camp-01" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Tenda 2 posti (3-4 stagioni)</div><div class="item-note">Il vento in quota è brutale</div></div></div>
-        <div class="item" data-id="camp-02" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Sacco a pelo fino a −10°C</div></div></div>
-        <div class="item" data-id="camp-03" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Materassino isolante (R-value alto)</div></div></div>
-        <div class="item" data-id="camp-04" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Fornello (gas o alcool)</div><div class="item-note">Cartucce gas disponibili a Osh e Murghab</div></div></div>
-        <div class="item" data-id="camp-05" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Pentolino + posate leggere</div></div></div>
-        <div class="item" data-id="camp-06" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Accendino × 2 + fiammiferi impermeabili</div></div></div>
-        <div class="item" data-id="camp-07" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Filtro acqua (Sawyer Squeeze o Katadyn)</div></div></div>
-        <div class="item" data-id="camp-08" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Borracce 2L min a testa</div></div></div>
-        <div class="item" data-id="camp-09" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Pastiglie purificanti acqua (backup)</div></div></div>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-header">
-        <span class="section-icon">🏥</span>
-        <span class="section-title">Pronto soccorso e farmacia</span>
-        <span class="section-count" id="count-salute"></span>
-      </div>
-      <div id="group-salute">
-        <div class="item" data-id="sal-01" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Kit pronto soccorso completo</div><div class="item-note">Cerotti, garze, bende, disinfettante</div></div></div>
-        <div class="item" data-id="sal-02" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Acetazolamide (Diamox)</div><div class="item-note">Fondamentale per il mal di montagna — serve ricetta</div></div></div>
-        <div class="item" data-id="sal-03" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Antibiotici ad ampio spettro</div><div class="item-note">Farsi prescrivere prima della partenza</div></div></div>
-        <div class="item" data-id="sal-04" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Antidolorifici (ibuprofene + paracetamolo)</div></div></div>
-        <div class="item" data-id="sal-05" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Antidiarroici (Loperamide)</div></div></div>
-        <div class="item" data-id="sal-06" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Antistaminico</div></div></div>
-        <div class="item" data-id="sal-07" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Pomata antibiotica</div></div></div>
-        <div class="item" data-id="sal-08" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Protezione solare SPF50+ + burrocacao</div><div class="item-note">UV intensi ad alta quota</div></div></div>
-        <div class="item" data-id="sal-09" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Termometro + guanti monouso</div></div></div>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-header">
-        <span class="section-icon">🗺️</span>
-        <span class="section-title">Navigazione e documenti</span>
-        <span class="section-count" id="count-nav"></span>
-      </div>
-      <div id="group-nav">
-        <div class="item" data-id="nav-01" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Passaporto + fotocopie</div></div></div>
-        <div class="item" data-id="nav-02" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Patente italiana + patente internazionale</div></div></div>
-        <div class="item" data-id="nav-03" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">eVisa Tajikistan + GBAO Permit (stampati)</div></div></div>
-        <div class="item" data-id="nav-04" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Documenti moto + lettera autorizzazione noleggiatore</div></div></div>
-        <div class="item" data-id="nav-05" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">USD cash (200$ in banconote nuove e piccole)</div><div class="item-note">Bancomat assenti dopo Osh</div></div></div>
-        <div class="item" data-id="nav-06" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Smartphone con OsmAnd + mappe offline</div><div class="item-note">Kyrgyzstan + Tajikistan scaricati prima di partire</div></div></div>
-        <div class="item" data-id="nav-07" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">iOverlander (punti benzina, lodge, campeggi)</div></div></div>
-        <div class="item" data-id="nav-08" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Supporto manubrio impermeabile per smartphone</div><div class="item-note">Ram Mount o Quadlock</div></div></div>
-        <div class="item" data-id="nav-09" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Garmin inReach Mini (o simile)</div><div class="item-note">SOS satellitare — quasi obbligatorio unsupported</div></div></div>
-        <div class="item" data-id="nav-10" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Numeri utili stampati (ambasciata, soccorso)</div></div></div>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-header">
-        <span class="section-icon">🔋</span>
-        <span class="section-title">Elettronica</span>
-        <span class="section-count" id="count-tech"></span>
-      </div>
-      <div id="group-tech">
-        <div class="item" data-id="tech-01" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">PowerBank ≥ 20.000 mAh</div></div></div>
-        <div class="item" data-id="tech-02" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Caricatore USB da manubrio</div></div></div>
-        <div class="item" data-id="tech-03" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Pannello solare flessibile</div><div class="item-note">Utile per ricariche nei campi lunghi</div></div></div>
-        <div class="item" data-id="tech-04" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Action cam + supporto manubrio</div></div></div>
-        <div class="item" data-id="tech-05" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Frontale + batterie di scorta</div></div></div>
-        <div class="item" data-id="tech-06" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">SIM locale (Beeline/O! per Kyrgyzstan, Tcell per Tajikistan)</div></div></div>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-header">
-        <span class="section-icon">🍱</span>
-        <span class="section-title">Cibo e acqua</span>
-        <span class="section-count" id="count-cibo"></span>
-      </div>
-      <div id="group-cibo">
-        <div class="item" data-id="cibo-01" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Razioni liofilizzate per 3-4 giorni</div><div class="item-note">Scorta per i tratti più remoti</div></div></div>
-        <div class="item" data-id="cibo-02" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Barrette energetiche + frutta secca</div></div></div>
-        <div class="item" data-id="cibo-03" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><div><div class="item-text">Sale + zucchero per reintegro</div></div></div>
-      </div>
-    </div>
+    <div id="checklist-portare"></div>
   </div><!-- end panel-portare -->
 
   <!-- PANEL: COSA FARE -->
   <div class="panel" id="panel-fare">
     <button class="reset-btn" onclick="resetPanel('fare')">↺ Azzera spunte</button>
-
-    <div class="week-label">Settimana 1 — Burocrazia urgente</div>
-    <div class="section">
-      <div id="group-todo1">
-        <div class="item" data-id="todo-01" onclick="toggle(this)">
-          <div class="checkbox"><span class="checkmark">✓</span></div>
-          <span class="priority urgent">Urgente</span>
-          <div><div class="item-text">Richiedere eVisa Tajikistan + GBAO Permit</div><div class="item-note">Su evisa.tj — richiede 5-10 giorni lavorativi · costa ~70$</div></div>
-        </div>
-        <div class="item" data-id="todo-02" onclick="toggle(this)">
-          <div class="checkbox"><span class="checkmark">✓</span></div>
-          <span class="priority urgent">Urgente</span>
-          <div><div class="item-text">Fare la patente internazionale (IDP)</div><div class="item-note">Ufficio ACI · ~15€ · rilasciata seduta stante</div></div>
-        </div>
-        <div class="item" data-id="todo-03" onclick="toggle(this)">
-          <div class="checkbox"><span class="checkmark">✓</span></div>
-          <span class="priority urgent">Urgente</span>
-          <div><div class="item-text">Prenotare appuntamento al centro vaccinazioni</div><div class="item-note">Alcune vaccinazioni richiedono più dosi nel tempo</div></div>
-        </div>
-        <div class="item" data-id="todo-04" onclick="toggle(this)">
-          <div class="checkbox"><span class="checkmark">✓</span></div>
-          <span class="priority high">Alta</span>
-          <div><div class="item-text">Contattare il noleggiatore e fare le domande chiave</div><div class="item-note">Candela, passo catena, attrezzi inclusi, camera o tubeless, assicurazione Tajikistan</div></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="week-label">Settimana 2 — Salute e sicurezza</div>
-    <div class="section">
-      <div id="group-todo2">
-        <div class="item" data-id="todo-05" onclick="toggle(this)">
-          <div class="checkbox"><span class="checkmark">✓</span></div>
-          <span class="priority high">Alta</span>
-          <div><div class="item-text">Visita travel medicine + vaccinazioni</div><div class="item-note">Epatite A/B, tifoide, tetano, rabbia (pre-esposizione per cani randagi)</div></div>
-        </div>
-        <div class="item" data-id="todo-06" onclick="toggle(this)">
-          <div class="checkbox"><span class="checkmark">✓</span></div>
-          <span class="priority high">Alta</span>
-          <div><div class="item-text">Ottenere Diamox (Acetazolamide) con ricetta</div><div class="item-note">Fondamentale per il mal di montagna a 4.000m+</div></div>
-        </div>
-        <div class="item" data-id="todo-07" onclick="toggle(this)">
-          <div class="checkbox"><span class="checkmark">✓</span></div>
-          <span class="priority high">Alta</span>
-          <div><div class="item-text">Attivare assicurazione sanitaria con copertura rimpatrio</div><div class="item-note">Verificare che copra alta quota e attività moto</div></div>
-        </div>
-        <div class="item" data-id="todo-08" onclick="toggle(this)">
-          <div class="checkbox"><span class="checkmark">✓</span></div>
-          <span class="priority high">Alta</span>
-          <div><div class="item-text">Farsi prescrivere antibiotici ad ampio spettro</div></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="week-label">Settimana 3 — Equipment e navigazione</div>
-    <div class="section">
-      <div id="group-todo3">
-        <div class="item" data-id="todo-09" onclick="toggle(this)">
-          <div class="checkbox"><span class="checkmark">✓</span></div>
-          <span class="priority high">Alta</span>
-          <div><div class="item-text">Comprare i ricambi specifici XT 600</div><div class="item-note">Candele NGK DR8EA, maglie catena 520, cavi, leve</div></div>
-        </div>
-        <div class="item" data-id="todo-10" onclick="toggle(this)">
-          <div class="checkbox"><span class="checkmark">✓</span></div>
-          <span class="priority high">Alta</span>
-          <div><div class="item-text">Scaricare OsmAnd + mappe offline</div><div class="item-note">Kyrgyzstan e Tajikistan — testare che funzionino offline</div></div>
-        </div>
-        <div class="item" data-id="todo-11" onclick="toggle(this)">
-          <div class="checkbox"><span class="checkmark">✓</span></div>
-          <span class="priority normal">Normale</span>
-          <div><div class="item-text">Scaricare iOverlander e salvare punti chiave</div><div class="item-note">Benzina, lodge, campeggi, meccanici lungo la M41</div></div>
-        </div>
-        <div class="item" data-id="todo-12" onclick="toggle(this)">
-          <div class="checkbox"><span class="checkmark">✓</span></div>
-          <span class="priority normal">Normale</span>
-          <div><div class="item-text">Procurarsi/attivare Garmin inReach Mini</div><div class="item-note">~350€ + abbonamento mensile ~15-35€</div></div>
-        </div>
-        <div class="item" data-id="todo-13" onclick="toggle(this)">
-          <div class="checkbox"><span class="checkmark">✓</span></div>
-          <span class="priority normal">Normale</span>
-          <div><div class="item-text">Comprare supporto manubrio impermeabile per smartphone</div></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="week-label">Settimana 4 — Logistica finale</div>
-    <div class="section">
-      <div id="group-todo4">
-        <div class="item" data-id="todo-14" onclick="toggle(this)">
-          <div class="checkbox"><span class="checkmark">✓</span></div>
-          <span class="priority high">Alta</span>
-          <div><div class="item-text">Cambiare USD cash</div><div class="item-note">Banconote nuove, non strappate — le vecchie non vengono accettate</div></div>
-        </div>
-        <div class="item" data-id="todo-15" onclick="toggle(this)">
-          <div class="checkbox"><span class="checkmark">✓</span></div>
-          <span class="priority high">Alta</span>
-          <div><div class="item-text">Definire itinerario con tappe e distanze realistiche</div><div class="item-note">15 giorni: scegliere bene tra M41 e deviazioni Wakhan</div></div>
-        </div>
-        <div class="item" data-id="todo-16" onclick="toggle(this)">
-          <div class="checkbox"><span class="checkmark">✓</span></div>
-          <span class="priority normal">Normale</span>
-          <div><div class="item-text">Lasciare itinerario e contatti a qualcuno in Italia</div><div class="item-note">Con date check-in previste</div></div>
-        </div>
-        <div class="item" data-id="todo-17" onclick="toggle(this)">
-          <div class="checkbox"><span class="checkmark">✓</span></div>
-          <span class="priority normal">Normale</span>
-          <div><div class="item-text">Acquistare SIM locale o verificare piano roaming</div></div>
-        </div>
-        <div class="item" data-id="todo-18" onclick="toggle(this)">
-          <div class="checkbox"><span class="checkmark">✓</span></div>
-          <span class="priority normal">Normale</span>
-          <div><div class="item-text">Giro di prova 30-40km con moto a pieno carico</div><div class="item-note">Da fare ad Osh prima di partire</div></div>
-        </div>
-        <div class="item" data-id="todo-19" onclick="toggle(this)">
-          <div class="checkbox"><span class="checkmark">✓</span></div>
-          <span class="priority normal">Normale</span>
-          <div><div class="item-text">Caricare copie digitali di tutti i documenti su cloud</div></div>
-        </div>
-      </div>
-    </div>
+    <div id="checklist-fare"></div>
   </div><!-- end panel-fare -->
+  <!-- PANEL: ITINERARIO -->
+  <div class="panel" id="panel-itinerario">
+
+    <div class="totale-bar">
+      <div class="totale-item"><div class="totale-label">Giorni</div><div class="totale-value">17</div></div>
+      <div class="totale-item"><div class="totale-label">Km totali</div><div class="totale-value">~2.370</div></div>
+      <div class="totale-item"><div class="totale-label">Km medi/giorno</div><div class="totale-value">~170</div></div>
+      <div class="totale-item"><div class="totale-label">Quota max</div><div class="totale-value">4.655m</div></div>
+      <div class="totale-item"><div class="totale-label">Partenza</div><div class="totale-value">25 Lug</div></div>
+      <div class="totale-item"><div class="totale-label">Arrivo</div><div class="totale-value">11 Ago</div></div>
+    </div>
+
+    <div id="map"></div>
+
+    <table class="itinerary-table">
+      <thead>
+        <tr>
+          <th>Giorno</th>
+          <th>Tappa</th>
+          <th>Km</th>
+          <th>Note</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><div class="day-num">G1</div><div class="day-date">25 Lug</div></td><td><div class="day-route">Osh – Uzgen</div><div class="day-tag tag-strada">Strada</div></td><td><div class="day-km">80</div></td><td><div class="day-note">Ritiro moto mattina, giro prova, partenza pomeriggio</div></td></tr>
+        <tr><td><div class="day-num">G2</div><div class="day-date">26 Lug</div></td><td><div class="day-route">Uzgen → Andijan</div><div class="day-tag tag-uzb">Uzbekistan</div></td><td><div class="day-km">100</div></td><td><div class="day-note">Confine Kyrgyzstan → Uzbekistan, Fergana Valley</div></td></tr>
+        <tr><td><div class="day-num">G3</div><div class="day-date">27 Lug</div></td><td><div class="day-route">Andijan → Samarcanda</div><div class="day-tag tag-uzb">Uzbekistan</div></td><td><div class="day-km">330</div></td><td><div class="day-note">Strada buona, arrivo in serata</div></td></tr>
+        <tr><td><div class="day-num">G4</div><div class="day-date">28 Lug</div></td><td><div class="day-route">Samarcanda – sosta</div><div class="day-tag tag-sosta">Sosta</div></td><td><div class="day-km">0</div></td><td><div class="day-note">Registan, Shah-i-Zinda, mausoleo Tamerlano</div></td></tr>
+        <tr><td><div class="day-num">G5</div><div class="day-date">29 Lug</div></td><td><div class="day-route">Samarcanda → Dushanbe</div><div class="day-tag tag-strada">Strada</div></td><td><div class="day-km">320</div></td><td><div class="day-note">Confine Uzbekistan → Tajikistan, strada mista</div></td></tr>
+        <tr><td><div class="day-num">G6</div><div class="day-date">30 Lug</div></td><td><div class="day-route">Dushanbe – sosta</div><div class="day-tag tag-sosta">Sosta</div></td><td><div class="day-km">0</div></td><td><div class="day-note">Riposo, manutenzione moto, visita capitale</div></td></tr>
+        <tr><td><div class="day-num">G7</div><div class="day-date">31 Lug</div></td><td><div class="day-route">Dushanbe → Kalaikhum</div><div class="day-tag tag-pamir">Pamir</div></td><td><div class="day-km">280</div></td><td><div class="day-note">Prima tappa sul Panj, Afghanistan di fronte</div></td></tr>
+        <tr><td><div class="day-num">G8</div><div class="day-date">1 Ago</div></td><td><div class="day-route">Kalaikhum → Khorog</div><div class="day-tag tag-pamir">Pamir</div></td><td><div class="day-km">180</div></td><td><div class="day-note">Fiume Panj, paesaggi spettacolari</div></td></tr>
+        <tr><td><div class="day-num">G9</div><div class="day-date">2 Ago</div></td><td><div class="day-route">Khorog – sosta</div><div class="day-tag tag-sosta">Sosta</div></td><td><div class="day-km">0</div></td><td><div class="day-note">Rifornimento totale, manutenzione, mercato</div></td></tr>
+        <tr><td><div class="day-num">G10</div><div class="day-date">3 Ago</div></td><td><div class="day-route">Khorog → Ishkashim</div><div class="day-tag tag-wakhan">Wakhan</div></td><td><div class="day-km">130</div></td><td><div class="day-note">Inizio Wakhan Corridor</div></td></tr>
+        <tr><td><div class="day-num">G11</div><div class="day-date">4 Ago</div></td><td><div class="day-route">Ishkashim → Langar</div><div class="day-tag tag-wakhan">Wakhan</div></td><td><div class="day-km">150</div></td><td><div class="day-note">Sterrato pesante, paesaggio lunare</div></td></tr>
+        <tr><td><div class="day-num">G12</div><div class="day-date">5 Ago</div></td><td><div class="day-route">Langar → Yamg</div><div class="day-tag tag-wakhan">Wakhan</div></td><td><div class="day-km">100</div></td><td><div class="day-note">Strada durissima, petroglifi, Yamchun Fort</div></td></tr>
+        <tr><td><div class="day-num">G13</div><div class="day-date">6 Ago</div></td><td><div class="day-route">Yamg → Murghab</div><div class="day-tag tag-pamir">Pamir</div></td><td><div class="day-km">200</div></td><td><div class="day-note">Risalita sull'altopiano, quota 3.600m</div></td></tr>
+        <tr><td><div class="day-num">G14</div><div class="day-date">7 Ago</div></td><td><div class="day-route">Murghab – sosta</div><div class="day-tag tag-sosta">Sosta</div></td><td><div class="day-km">0</div></td><td><div class="day-note">Acclimatamento obbligatorio, mercato, esplorazione</div></td></tr>
+        <tr><td><div class="day-num">G15</div><div class="day-date">8 Ago</div></td><td><div class="day-route">Murghab → Karakul</div><div class="day-tag tag-pamir">Pamir</div></td><td><div class="day-km">120</div></td><td><div class="day-note">Ak-Baital Pass 4.655m — punto più alto del viaggio</div></td></tr>
+        <tr><td><div class="day-num">G16</div><div class="day-date">9 Ago</div></td><td><div class="day-route">Karakul → Sary-Tash</div><div class="day-tag tag-pamir">Pamir</div></td><td><div class="day-km">200</div></td><td><div class="day-note">Kyzyl-Art Pass 4.282m, rientro in Kyrgyzstan</div></td></tr>
+        <tr><td><div class="day-num">G17</div><div class="day-date">10 Ago</div></td><td><div class="day-route">Sary-Tash → Osh</div><div class="day-tag tag-strada">Strada</div></td><td><div class="day-km">180</div></td><td><div class="day-note">Taldyk Pass 3.615m, consegna moto</div></td></tr>
+      </tbody>
+    </table>
+  </div><!-- end panel-itinerario -->
+
+  <!-- PANEL: INFO -->
+  <div class="panel" id="panel-info">
+
+    <!-- DOCUMENTI -->
+    <div class="info-section">
+      <div class="info-section-title">📄 Documenti e visti</div>
+
+      <div class="info-card">
+        <div class="info-card-title">Tajikistan</div>
+        <p><span class="info-tag blue">eVisa</span> Richiesta per cittadini italiani. Si ottiene su <a href="https://evisa.tj" target="_blank">evisa.tj</a> — costo ~50$, tempi 5-10 giorni lavorativi.</p>
+        <p><span class="info-tag orange">GBAO Permit</span> Obbligatorio per il Gorno-Badakhshan (tutta la Pamir Highway). Si richiede insieme all'eVisa spuntando l'apposita casella — aggiunge ~20$. Senza questo ti fermano al primo checkpoint.</p>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">Kyrgyzstan</div>
+        <p><span class="info-tag green">Visa-free</span> I cittadini italiani entrano senza visto fino a 60 giorni.</p>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">Uzbekistan</div>
+        <p><span class="info-tag green">Visa-free</span> I cittadini italiani entrano senza visto fino a 30 giorni.</p>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">Patente internazionale</div>
+        <p>Obbligatoria in Tajikistan e Kyrgyzstan. Si ottiene presso qualsiasi ufficio ACI con la patente italiana originale — costo ~15€, rilasciata seduta stante. Porta sempre entrambe le patenti ai checkpoint.</p>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">Documenti moto (noleggio)</div>
+        <p>Il noleggiatore deve fornire: libretto di circolazione, assicurazione valida in Tajikistan e lettera di autorizzazione firmata per il transito internazionale. Chiedi che i documenti siano in russo/tajik e inglese.</p>
+      </div>
+    </div>
+
+    <!-- STRADA -->
+    <div class="info-section">
+      <div class="info-section-title">🛣️ Strada e percorso</div>
+
+      <div class="info-card">
+        <div class="info-card-title">La M41 — Pamir Highway</div>
+        <p>Seconda strada più alta del mondo dopo la Karakorum Highway. Collega Dushanbe (Tajikistan) con Osh (Kyrgyzstan) per oltre 1.300km. Attraversa il Gorno-Badakhshan, regione autonoma del Tajikistan.</p>
+        <p>Attenzione: frane, nevicate e tensioni geopolitiche possono alterare i percorsi. Siate flessibili e verificate sempre le condizioni attuali chiedendo agli abitanti del posto.</p>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">Dushanbe → Khorog: quale strada?</div>
+        <p><span class="info-tag green">Consigliata</span> <strong>Via sud (Danghara/Kulob)</strong> — più frequentata, meno ripida, in condizioni migliori, aperta tutto l'anno.</p>
+        <p><span class="info-tag orange">Alternativa</span> <strong>Via nord (Obigarm)</strong> — più breve ma più ripida e in condizioni peggiori. Verificare annualmente.</p>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">Wakhan Corridor</div>
+        <p>Deviazione dalla M41 che costeggia il confine afghano lungo il fiume Panj. Sterrato pesante, guadi, zero assistenza. Il tratto che collega Langar con Alichur/Murghab rimane chiuso da novembre ad aprile per neve.</p>
+        <p>Centri principali: Ishkashim → Vrang → Zong → Langar.</p>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">Passi principali</div>
+        <div class="info-grid">
+          <div class="info-stat"><div class="info-stat-val">4.655m</div><div class="info-stat-lbl">Ak-Baital (punto più alto)</div></div>
+          <div class="info-stat"><div class="info-stat-val">4.282m</div><div class="info-stat-lbl">Kyzyl-Art Pass</div></div>
+          <div class="info-stat"><div class="info-stat-val">3.615m</div><div class="info-stat-lbl">Taldyk Pass</div></div>
+          <div class="info-stat"><div class="info-stat-val">3.000m+</div><div class="info-stat-lbl">Quota media altopiano</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOGISTICA -->
+    <div class="info-section">
+      <div class="info-section-title">⛽ Logistica</div>
+
+      <div class="info-card">
+        <div class="info-card-title">Benzina</div>
+        <p>Regola d'oro: fai sempre benzina nel primo distributore che trovi — il successivo può essere centinaia di km dopo. Porta sempre una tanica da 20L. Qualità: 92 ottani. A volte si trova solo da rivenditori privati in taniche.</p>
+        <p>Rifornimenti sicuri: Osh, Sary-Tash, Murghab, Khorog, Dushanbe. Tra questi punti pianifica sempre con riserva.</p>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">Alloggi</div>
+        <p>In ogni villaggio c'è almeno una <em>gostìnitsa</em> (homestay) — costo indicativo 10-12$ a persona, pasti inclusi. Non è possibile prenotare in anticipo ma l'ospitalità pamiri è leggendaria. Spesso verrete invitati a dormire gratis da famiglie locali.</p>
+        <p>Nota: nel 90% delle guesthouse non c'è doccia né bagno occidentale. Venite preparati.</p>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">Cibo e acqua</div>
+        <p>Cucina semplice: zuppe, pane, montone, latticini, patate. Fate provviste di frutta secca e cibo conservabile ai mercati di Osh o Dushanbe. La città meglio fornita lungo la M41 è Khorog.</p>
+        <p>Acqua: usate sempre il filtro (Sawyer Squeeze o Katadyn) — l'acqua dei fiumi glaciali non è sempre sicura. Portate le pastiglie purificanti come backup.</p>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">Soldi</div>
+        <p>Portate USD cash in banconote nuove e di piccolo taglio (1$, 5$, 10$, 20$). Le banconote vecchie o strappate non vengono accettate. Bancomat praticamente assenti dopo Osh e Dushanbe.</p>
+        <p>Budget indicativo trasporti (noleggio moto escluso): 150-200€ a persona per l'intero percorso.</p>
+      </div>
+    </div>
+
+    <!-- SALUTE -->
+    <div class="info-section">
+      <div class="info-section-title">🏥 Salute e altitudine</div>
+
+      <div class="info-card">
+        <div class="info-card-title">Mal di montagna</div>
+        <p>Siete sempre oltre i 2.000m, spesso oltre i 3.000m. L'acclimatamento è fondamentale — la tappa a Murghab prima dell'Ak-Baital non va saltata anche se vi sentite bene.</p>
+        <p>Portate Acetazolamide (Diamox) — serve ricetta medica. In caso di sintomi gravi (mal di testa persistente, nausea, confusione) scendete di quota immediatamente.</p>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">Diarrea del viaggiatore</div>
+        <p>Evento quasi certo nel Pamir. Attenzione maniacale all'acqua (sempre bollita o filtrata), al cibo e a chi lo prepara. In molte case manca l'acqua corrente.</p>
+        <p>Portate Loperamide/Dissenten in quantità generosa, fermenti lattici potenti (difficili da trovare in zona) e sali di reidratazione. La disidratazione ad alta quota è pericolosa.</p>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">Vaccinazioni raccomandate</div>
+        <p><span class="info-tag blue">Raccomandate</span> Epatite A e B, febbre tifoide, tetano/difterite/polio, rabbia (pre-esposizione — cani randagi frequenti).</p>
+        <p><span class="info-tag green">Non necessarie</span> Malaria (quota troppo alta), febbre gialla (non richiesta).</p>
+        <p>Alcune vaccinazioni richiedono più dosi nel tempo — prenota il centro vaccinazioni con almeno 4 settimane di anticipo.</p>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">Strutture mediche</div>
+        <p>Praticamente assenti dopo Khorog. Il centro medico più vicino in caso di emergenza grave è Osh o Dushanbe. Il Garmin inReach Mini con funzione SOS è quasi obbligatorio per un viaggio unsupported.</p>
+        <p>Attivate un'assicurazione con copertura rimpatrio e verifica che copra alta quota e attività in moto.</p>
+      </div>
+    </div>
+
+    <!-- LINK UTILI -->
+    <div class="info-section">
+      <div class="info-section-title">🔗 Link utili</div>
+      <div class="info-card">
+        <div class="info-card-title">Risorse online</div>
+        <p><a href="https://evisa.tj" target="_blank">evisa.tj</a> — eVisa Tajikistan + GBAO Permit</p>
+        <p><a href="https://www.viaggiaresicuri.it" target="_blank">viaggiaresicuri.it</a> — Farnesina, aggiornamenti visti e sicurezza</p>
+        <p><a href="https://osmand.net" target="_blank">osmand.net</a> — Mappe offline per la navigazione</p>
+        <p><a href="https://ioverlander.com" target="_blank">ioverlander.com</a> — Benzina, guesthouse, campeggi lungo la M41</p>
+        <p><a href="https://www.painderoute.it/pamir-highway-guida-per-viaggiare-al-cuore-dellasia/" target="_blank">Pain de Route — Guida Pamir</a> — Guida dettagliata di riferimento</p>
+      </div>
+    </div>
+
+  </div><!-- end panel-info -->
 
 </main>
 </div><!-- end #app -->
 
+<!-- LEAFLET -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+
 <script>
+  // ── DATA LOADER ──
+  async function loadData() {
+    const res = await fetch('./data.json');
+    const data = await res.json();
+    renderPortare(data.portare);
+    renderFare(data.fare);
+  }
+
+  function renderPortare(sections) {
+    const container = document.getElementById('checklist-portare');
+    container.innerHTML = sections.map(section => `
+      <div class="section">
+        <div class="section-header">
+          <span class="section-icon">${section.icon}</span>
+          <span class="section-title">${section.title}</span>
+          <span class="section-count" id="count-${section.id}"></span>
+        </div>
+        <div id="group-${section.id}">
+          ${section.items.map(item => `
+            <div class="item" data-id="${item.id}" onclick="toggle(this)">
+              <div class="checkbox"><span class="checkmark">✓</span></div>
+              <div>
+                <div class="item-text">${item.text}</div>
+                ${item.note ? `<div class="item-note">${item.note}</div>` : ''}
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function renderFare(groups) {
+    const priorityLabels = { urgent: 'Urgente', high: 'Alta', normal: 'Normale' };
+    const container = document.getElementById('checklist-fare');
+    container.innerHTML = groups.map(group => `
+      <div class="week-label">${group.week}</div>
+      <div class="section">
+        <div id="group-${group.id}">
+          ${group.items.map(item => `
+            <div class="item" data-id="${item.id}" onclick="toggle(this)">
+              <div class="checkbox"><span class="checkmark">✓</span></div>
+              ${item.priority ? `<span class="priority ${item.priority}">${priorityLabels[item.priority]}</span>` : ''}
+              <div>
+                <div class="item-text">${item.text}</div>
+                ${item.note ? `<div class="item-note">${item.note}</div>` : ''}
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `).join('');
+  }
+
   const SUPABASE_URL = 'https://eslbhgdoipdekzvqksct.supabase.co';
   const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVzbGJoZ2RvaXBkZWt6dnFrc2N0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE4MDEyOTMsImV4cCI6MjA5NzM3NzI5M30.e--EuMygVoWhPnRTgG-Gxv_n1_BGz-ZZR-EJKefSckk';
 
@@ -763,7 +832,8 @@
     document.getElementById('loading-overlay').style.display = 'flex';
 
     try {
-      // Load current user's state
+      // Load data from JSON first, then sync with Supabase
+      await loadData();
       const rows = await loadChecked(currentUser);
       const checkedIds = new Set(rows.map(r => r.id));
 
@@ -830,12 +900,84 @@
   }
 
   // ── TABS ──
+  let mapInitialized = false;
+
   function switchTab(name, event) {
     document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('panel-' + name).classList.add('active');
     if (event && event.target) event.target.classList.add('active');
-    updateProgress();
+    if (name === 'itinerario' || name === 'info') {
+      if (name === 'itinerario') {
+        if (!mapInitialized) {
+          setTimeout(() => { initMap(); mapInitialized = true; }, 300);
+        } else {
+          setTimeout(() => { if (window._pamirMap) window._pamirMap.invalidateSize(); }, 300);
+        }
+      }
+    } else {
+      updateProgress();
+    }
+  }
+
+  function initMap() {
+    const map = L.map('map', { zoomControl: true }).setView([38.5, 70.0], 5);
+    window._pamirMap = map;
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors',
+      maxZoom: 17
+    }).addTo(map);
+
+    const waypoints = [
+      { name: 'Osh',        lat: 40.5165, lng: 72.8034, day: 'G1',  tag: 'strada' },
+      { name: 'Uzgen',      lat: 40.7674, lng: 73.3031, day: 'G1',  tag: 'strada' },
+      { name: 'Andijan',    lat: 40.8154, lng: 72.2838, day: 'G2',  tag: 'uzb' },
+      { name: 'Samarcanda', lat: 39.6508, lng: 66.9654, day: 'G3-4',tag: 'uzb' },
+      { name: 'Dushanbe',   lat: 38.5598, lng: 68.7870, day: 'G5-6',tag: 'strada' },
+      { name: 'Kalaikhum',  lat: 38.4614, lng: 70.7897, day: 'G7',  tag: 'pamir' },
+      { name: 'Khorog',     lat: 37.4883, lng: 71.5902, day: 'G8-9',tag: 'pamir' },
+      { name: 'Ishkashim',  lat: 36.7243, lng: 71.6132, day: 'G10', tag: 'wakhan' },
+      { name: 'Langar',     lat: 37.0556, lng: 72.6738, day: 'G11', tag: 'wakhan' },
+      { name: 'Yamg',       lat: 36.9697, lng: 72.2611, day: 'G12', tag: 'wakhan' },
+      { name: 'Murghab',    lat: 38.1741, lng: 73.9672, day: 'G13-14', tag: 'pamir' },
+      { name: 'Karakul',    lat: 38.4221, lng: 73.9800, day: 'G15', tag: 'pamir' },
+      { name: 'Sary-Tash',  lat: 39.7271, lng: 73.2515, day: 'G16', tag: 'pamir' },
+    ];
+
+    const colors = {
+      strada: '#9A9AD4',
+      uzb:    '#7AD47A',
+      pamir:  '#7AAFD4',
+      wakhan: '#D4A07A',
+      sosta:  '#6B6258'
+    };
+
+    // Draw route line
+    const latlngs = waypoints.map(w => [w.lat, w.lng]);
+    L.polyline(latlngs, { color: '#C8A96E', weight: 2.5, opacity: 0.7, dashArray: '6,4' }).addTo(map);
+
+    // Add markers
+    waypoints.forEach((w, i) => {
+      const color = colors[w.tag] || '#C8A96E';
+      const icon = L.divIcon({
+        className: '',
+        html: `<div style="
+          width:28px; height:28px; border-radius:50%;
+          background:${color}22; border:2px solid ${color};
+          display:flex; align-items:center; justify-content:center;
+          font-family:'Bebas Neue',sans-serif; font-size:10px;
+          color:${color}; letter-spacing:0.05em;
+          box-shadow:0 2px 8px rgba(0,0,0,0.5);
+        ">${i+1}</div>`,
+        iconSize: [28, 28],
+        iconAnchor: [14, 14]
+      });
+
+      L.marker([w.lat, w.lng], { icon })
+        .addTo(map)
+        .bindPopup(`<b style="font-family:sans-serif">${w.name}</b><br><span style="font-size:11px;color:#888">${w.day}</span>`);
+    });
   }
 
   // ── RESET ──
