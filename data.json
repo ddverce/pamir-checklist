@@ -5,19 +5,71 @@
       "icon": "🔧",
       "title": "Moto e ricambi (XT 600)",
       "items": [
-        { "id": "moto-01", "text": "Candele NGK DR8EA × 2", "note": "L'XT le brucia spesso in quota" },
-        { "id": "moto-02", "text": "Maglie rapide catena 520 × 3", "note": "Punto debole numero uno" },
-        { "id": "moto-03", "text": "Kit riparazione pneumatici", "note": "Leve + toppe + CO2 o mini pompetta" },
-        { "id": "moto-04", "text": "Cavo freno spare" },
-        { "id": "moto-05", "text": "Cavo frizione spare" },
-        { "id": "moto-06", "text": "Leva freno spare" },
-        { "id": "moto-07", "text": "Leva frizione spare" },
-        { "id": "moto-08", "text": "Fusibili assortiti", "note": "5A · 10A · 15A · 20A" },
-        { "id": "moto-09", "text": "Bulbo faro H4 × 1" },
-        { "id": "moto-10", "text": "Nastro americano + fascette stringicavo" },
-        { "id": "moto-11", "text": "Filo di ferro + Loctite 243" },
-        { "id": "moto-12", "text": "Lubrificante catena" },
-        { "id": "moto-13", "text": "Tanica carburante extra (20L min)", "note": "Tra Murghab e tratti remoti la benzina sparisce" }
+        {
+          "id": "moto-01",
+          "text": "Candela NGK DPR8EIX-9 × 1 (spare)",
+          "note": "Jake include 1 candela nel kit — porta 1 spare. DPR8EIX-9 è il modello ufficiale, DR8EA compatibile"
+        },
+        {
+          "id": "moto-02",
+          "text": "Maglie rapide catena 520 × 3",
+          "note": "Punto debole numero uno"
+        },
+        {
+          "id": "moto-03",
+          "text": "Kit riparazione pneumatici",
+          "note": "Leve + toppe + CO2 — pompa inclusa da Jake, porta kit toppe e CO2"
+        },
+        {
+          "id": "moto-04",
+          "text": "Liquido freni DOT 4 (250ml)",
+          "note": "Freni idraulici — può perdere su sterrato con vibrazioni continue"
+        },
+        {
+          "id": "moto-04b",
+          "text": "Pastiglie freno anteriori + posteriori (1 set)",
+          "note": "Si consumano più velocemente su sterrato e discese lunghe del Pamir"
+        },
+        {
+          "id": "moto-05",
+          "text": "Cavo frizione spare (meccanico)",
+          "note": "Verificare numero parte corretto con meccanico o Jake prima di comprare"
+        },
+        {
+          "id": "moto-06",
+          "text": "Leva freno spare"
+        },
+        {
+          "id": "moto-07",
+          "text": "Leva frizione spare"
+        },
+        {
+          "id": "moto-08",
+          "text": "Fusibili assortiti",
+          "note": "5A · 10A · 15A · 20A"
+        },
+        {
+          "id": "moto-09",
+          "text": "Bulbo faro H4 × 1"
+        },
+        {
+          "id": "moto-10",
+          "text": "Nastro americano + fascette stringicavo"
+        },
+        {
+          "id": "moto-11",
+          "text": "Filo di ferro + Loctite 243"
+        },
+        {
+          "id": "moto-12",
+          "text": "Lubrificante catena",
+          "note": "✅ Incluso da Jake — non portare"
+        },
+        {
+          "id": "moto-13",
+          "text": "Tanica carburante extra (20L min)",
+          "note": "Tra Murghab e tratti remoti la benzina sparisce"
+        }
       ]
     },
     {
@@ -25,16 +77,49 @@
       "icon": "🎽",
       "title": "Abbigliamento moto",
       "items": [
-        { "id": "abiti-01", "text": "Giacca con protezioni CE2 + strato termico" },
-        { "id": "abiti-02", "text": "Pantaloni moto con protezioni" },
-        { "id": "abiti-03", "text": "Stivali moto impermeabili" },
-        { "id": "abiti-04", "text": "Guanti estivi" },
-        { "id": "abiti-05", "text": "Guanti invernali", "note": "Anche in luglio al passo fa freddo" },
-        { "id": "abiti-06", "text": "Sottocasco termico + balaclava" },
-        { "id": "abiti-07", "text": "Goggles / occhiali antipolvere", "note": "La polvere è ovunque sul Pamir" },
-        { "id": "abiti-08", "text": "Gilet catarifrangente", "note": "Obbligatorio in alcuni tratti" },
-        { "id": "abiti-09", "text": "Cambio vestiti (2-3 set leggeri)" },
-        { "id": "abiti-10", "text": "Pile/felpa pesante" }
+        {
+          "id": "abiti-01",
+          "text": "Giacca con protezioni CE2 + strato termico"
+        },
+        {
+          "id": "abiti-02",
+          "text": "Pantaloni moto con protezioni"
+        },
+        {
+          "id": "abiti-03",
+          "text": "Stivali moto impermeabili"
+        },
+        {
+          "id": "abiti-04",
+          "text": "Guanti estivi"
+        },
+        {
+          "id": "abiti-05",
+          "text": "Guanti invernali",
+          "note": "Anche in luglio al passo fa freddo"
+        },
+        {
+          "id": "abiti-06",
+          "text": "Sottocasco termico + balaclava"
+        },
+        {
+          "id": "abiti-07",
+          "text": "Goggles / occhiali antipolvere",
+          "note": "La polvere è ovunque sul Pamir"
+        },
+        {
+          "id": "abiti-08",
+          "text": "Gilet catarifrangente",
+          "note": "Obbligatorio in alcuni tratti"
+        },
+        {
+          "id": "abiti-09",
+          "text": "Cambio vestiti (2-3 set leggeri)"
+        },
+        {
+          "id": "abiti-10",
+          "text": "Pile/felpa pesante"
+        }
       ]
     },
     {
@@ -42,15 +127,44 @@
       "icon": "⛺",
       "title": "Campeggio",
       "items": [
-        { "id": "camp-01", "text": "Tenda 2 posti (3-4 stagioni)", "note": "Il vento in quota è brutale" },
-        { "id": "camp-02", "text": "Sacco a pelo fino a −10°C" },
-        { "id": "camp-03", "text": "Materassino isolante (R-value alto)" },
-        { "id": "camp-04", "text": "Fornello (gas o alcool)", "note": "Cartucce gas disponibili a Osh e Murghab" },
-        { "id": "camp-05", "text": "Pentolino + posate leggere" },
-        { "id": "camp-06", "text": "Accendino × 2 + fiammiferi impermeabili" },
-        { "id": "camp-07", "text": "Filtro acqua (Sawyer Squeeze o Katadyn)" },
-        { "id": "camp-08", "text": "Borracce 2L min a testa" },
-        { "id": "camp-09", "text": "Pastiglie purificanti acqua (backup)" }
+        {
+          "id": "camp-01",
+          "text": "Tenda 2 posti (3-4 stagioni)",
+          "note": "Il vento in quota è brutale"
+        },
+        {
+          "id": "camp-02",
+          "text": "Sacco a pelo fino a −10°C"
+        },
+        {
+          "id": "camp-03",
+          "text": "Materassino isolante (R-value alto)"
+        },
+        {
+          "id": "camp-04",
+          "text": "Fornello (gas o alcool)",
+          "note": "Cartucce gas disponibili a Osh e Murghab"
+        },
+        {
+          "id": "camp-05",
+          "text": "Pentolino + posate leggere"
+        },
+        {
+          "id": "camp-06",
+          "text": "Accendino × 2 + fiammiferi impermeabili"
+        },
+        {
+          "id": "camp-07",
+          "text": "Filtro acqua (Sawyer Squeeze o Katadyn)"
+        },
+        {
+          "id": "camp-08",
+          "text": "Borracce 2L min a testa"
+        },
+        {
+          "id": "camp-09",
+          "text": "Pastiglie purificanti acqua (backup)"
+        }
       ]
     },
     {
@@ -58,15 +172,46 @@
       "icon": "🏥",
       "title": "Pronto soccorso e farmacia",
       "items": [
-        { "id": "sal-01", "text": "Kit pronto soccorso completo", "note": "Cerotti, garze, bende, disinfettante" },
-        { "id": "sal-02", "text": "Acetazolamide (Diamox)", "note": "Fondamentale per il mal di montagna — serve ricetta" },
-        { "id": "sal-03", "text": "Antibiotici ad ampio spettro", "note": "Farsi prescrivere prima della partenza" },
-        { "id": "sal-04", "text": "Antidolorifici (ibuprofene + paracetamolo)" },
-        { "id": "sal-05", "text": "Antidiarroici (Loperamide)" },
-        { "id": "sal-06", "text": "Antistaminico" },
-        { "id": "sal-07", "text": "Pomata antibiotica" },
-        { "id": "sal-08", "text": "Protezione solare SPF50+ + burrocacao", "note": "UV intensi ad alta quota" },
-        { "id": "sal-09", "text": "Termometro + guanti monouso" }
+        {
+          "id": "sal-01",
+          "text": "Kit pronto soccorso completo",
+          "note": "Cerotti, garze, bende, disinfettante"
+        },
+        {
+          "id": "sal-02",
+          "text": "Acetazolamide (Diamox)",
+          "note": "Fondamentale per il mal di montagna — serve ricetta"
+        },
+        {
+          "id": "sal-03",
+          "text": "Antibiotici ad ampio spettro",
+          "note": "Farsi prescrivere prima della partenza"
+        },
+        {
+          "id": "sal-04",
+          "text": "Antidolorifici (ibuprofene + paracetamolo)"
+        },
+        {
+          "id": "sal-05",
+          "text": "Antidiarroici (Loperamide)"
+        },
+        {
+          "id": "sal-06",
+          "text": "Antistaminico"
+        },
+        {
+          "id": "sal-07",
+          "text": "Pomata antibiotica"
+        },
+        {
+          "id": "sal-08",
+          "text": "Protezione solare SPF50+ + burrocacao",
+          "note": "UV intensi ad alta quota"
+        },
+        {
+          "id": "sal-09",
+          "text": "Termometro + guanti monouso"
+        }
       ]
     },
     {
@@ -74,16 +219,60 @@
       "icon": "🗺️",
       "title": "Navigazione e documenti",
       "items": [
-        { "id": "nav-01", "text": "Passaporto + fotocopie" },
-        { "id": "nav-02", "text": "Patente italiana + patente internazionale" },
-        { "id": "nav-03", "text": "eVisa Tajikistan + GBAO Permit (stampati)" },
-        { "id": "nav-04", "text": "Documenti moto + lettera autorizzazione noleggiatore" },
-        { "id": "nav-05", "text": "USD cash (200$ in banconote nuove e piccole)", "note": "Bancomat assenti dopo Osh" },
-        { "id": "nav-06", "text": "Smartphone con OsmAnd + mappe offline", "note": "Kyrgyzstan + Tajikistan scaricati prima di partire" },
-        { "id": "nav-07", "text": "iOverlander (punti benzina, lodge, campeggi)" },
-        { "id": "nav-08", "text": "Supporto manubrio impermeabile per smartphone", "note": "Ram Mount o Quadlock" },
-        { "id": "nav-09", "text": "Garmin inReach Mini (o simile)", "note": "SOS satellitare — quasi obbligatorio unsupported" },
-        { "id": "nav-10", "text": "Numeri utili stampati (ambasciata, soccorso)" }
+        {
+          "id": "nav-01",
+          "text": "Passaporto + fotocopie"
+        },
+        {
+          "id": "nav-02",
+          "text": "Patente italiana + patente internazionale"
+        },
+        {
+          "id": "nav-03",
+          "text": "eVisa Tajikistan + GBAO Permit (stampati)"
+        },
+        {
+          "id": "nav-04",
+          "text": "Documenti moto + lettera autorizzazione noleggiatore"
+        },
+        {
+          "id": "nav-05",
+          "text": "USD cash (200$ in banconote nuove e piccole)",
+          "note": "Bancomat assenti dopo Osh"
+        },
+        {
+          "id": "nav-06",
+          "text": "Smartphone con OsmAnd + mappe offline",
+          "note": "Kyrgyzstan + Tajikistan scaricati prima di partire"
+        },
+        {
+          "id": "nav-07",
+          "text": "iOverlander (punti benzina, lodge, campeggi)"
+        },
+        {
+          "id": "nav-08",
+          "text": "Supporto manubrio impermeabile per smartphone",
+          "note": "Ram Mount o Quadlock"
+        },
+        {
+          "id": "nav-09",
+          "text": "Garmin inReach Mini (o simile)",
+          "note": "SOS satellitare — quasi obbligatorio unsupported"
+        },
+        {
+          "id": "nav-10",
+          "text": "Numeri utili stampati (ambasciata, soccorso)"
+        },
+        {
+          "id": "nav-11",
+          "text": "Power of attorney noleggio (× 2 moto)",
+          "note": "Chiedere a Jake — $20 per moto · necessario per crossing in Tajikistan"
+        },
+        {
+          "id": "nav-12",
+          "text": "Valutare assicurazione danni moto Jake",
+          "note": "$15/giorno per moto · copre solo la moto del noleggio, non altro · decidere prima della partenza"
+        }
       ]
     },
     {
@@ -91,12 +280,31 @@
       "icon": "🔋",
       "title": "Elettronica",
       "items": [
-        { "id": "tech-01", "text": "PowerBank ≥ 20.000 mAh" },
-        { "id": "tech-02", "text": "Caricatore USB da manubrio" },
-        { "id": "tech-03", "text": "Pannello solare flessibile", "note": "Utile per ricariche nei campi lunghi" },
-        { "id": "tech-04", "text": "Action cam + supporto manubrio" },
-        { "id": "tech-05", "text": "Frontale + batterie di scorta" },
-        { "id": "tech-06", "text": "SIM locale (Beeline/O! per Kyrgyzstan, Tcell per Tajikistan)" }
+        {
+          "id": "tech-01",
+          "text": "PowerBank ≥ 20.000 mAh"
+        },
+        {
+          "id": "tech-02",
+          "text": "Caricatore USB da manubrio"
+        },
+        {
+          "id": "tech-03",
+          "text": "Pannello solare flessibile",
+          "note": "Utile per ricariche nei campi lunghi"
+        },
+        {
+          "id": "tech-04",
+          "text": "Action cam + supporto manubrio"
+        },
+        {
+          "id": "tech-05",
+          "text": "Frontale + batterie di scorta"
+        },
+        {
+          "id": "tech-06",
+          "text": "SIM locale (Beeline/O! per Kyrgyzstan, Tcell per Tajikistan)"
+        }
       ]
     },
     {
@@ -104,10 +312,24 @@
       "icon": "🍱",
       "title": "Cibo e acqua",
       "items": [
-        { "id": "cibo-01", "text": "Razioni liofilizzate per 3-4 giorni", "note": "Scorta per i tratti più remoti" },
-        { "id": "cibo-02", "text": "Barrette energetiche + frutta secca" },
-        { "id": "cibo-03", "text": "Sale + zucchero per reintegro" },
-        { "id": "cibo-04", "text": "Fermenti lattici potenti", "note": "Portali dall'Italia — difficili da trovare in Asia Centrale" }
+        {
+          "id": "cibo-01",
+          "text": "Razioni liofilizzate per 3-4 giorni",
+          "note": "Scorta per i tratti più remoti"
+        },
+        {
+          "id": "cibo-02",
+          "text": "Barrette energetiche + frutta secca"
+        },
+        {
+          "id": "cibo-03",
+          "text": "Sale + zucchero per reintegro"
+        },
+        {
+          "id": "cibo-04",
+          "text": "Fermenti lattici potenti",
+          "note": "Portali dall'Italia — difficili da trovare in Asia Centrale"
+        }
       ]
     },
     {
@@ -115,8 +337,16 @@
       "icon": "📚",
       "title": "Cartografia e riferimenti",
       "items": [
-        { "id": "map-01", "text": "Cartina cartacea Reise Know-How Asia Centrale", "note": "Indispensabile — Google Maps non ha topografia sufficiente in zona" },
-        { "id": "map-02", "text": "Piumino comprimibile leggero (≤300g)", "note": "Tipo Decathlon — indispensabile di notte anche in luglio/agosto" }
+        {
+          "id": "map-01",
+          "text": "Cartina cartacea Reise Know-How Asia Centrale",
+          "note": "Indispensabile — Google Maps non ha topografia sufficiente in zona"
+        },
+        {
+          "id": "map-02",
+          "text": "Piumino comprimibile leggero (≤300g)",
+          "note": "Tipo Decathlon — indispensabile di notte anche in luglio/agosto"
+        }
       ]
     },
     {
@@ -124,8 +354,16 @@
       "icon": "💊",
       "title": "Farmaci aggiuntivi",
       "items": [
-        { "id": "farm-01", "text": "Loperamide/Dissenten in quantità generosa", "note": "Diarrea del viaggiatore è quasi certa nel Pamir" },
-        { "id": "farm-02", "text": "Sali di reidratazione orale", "note": "Per disidratazione da diarrea ad alta quota — combo pericolosa" }
+        {
+          "id": "farm-01",
+          "text": "Loperamide/Dissenten in quantità generosa",
+          "note": "Diarrea del viaggiatore è quasi certa nel Pamir"
+        },
+        {
+          "id": "farm-02",
+          "text": "Sali di reidratazione orale",
+          "note": "Per disidratazione da diarrea ad alta quota — combo pericolosa"
+        }
       ]
     }
   ],
@@ -134,46 +372,170 @@
       "id": "todo1",
       "week": "Settimana 1 — Burocrazia urgente",
       "items": [
-        { "id": "todo-01", "text": "Richiedere eVisa Tajikistan + GBAO Permit", "note": "Su evisa.tj — richiede 5-10 giorni lavorativi · costa ~70$", "priority": "urgent" },
-        { "id": "todo-02", "text": "Fare la patente internazionale (IDP)", "note": "Ufficio ACI · ~15€ · rilasciata seduta stante", "priority": "urgent" },
-        { "id": "todo-03", "text": "Prenotare appuntamento al centro vaccinazioni", "note": "Alcune vaccinazioni richiedono più dosi nel tempo", "priority": "urgent" },
-        { "id": "todo-04", "text": "Contattare il noleggiatore e fare le domande chiave", "note": "Candela, passo catena, attrezzi inclusi, camera o tubeless, assicurazione Tajikistan", "priority": "high" }
+        {
+          "id": "todo-01",
+          "text": "Richiedere eVisa Tajikistan + GBAO Permit",
+          "note": "Su evisa.tj — richiede 5-10 giorni lavorativi · costa ~70$",
+          "priority": "urgent"
+        },
+        {
+          "id": "todo-02",
+          "text": "Fare la patente internazionale (IDP)",
+          "note": "Ufficio ACI · ~15€ · rilasciata seduta stante",
+          "priority": "urgent"
+        },
+        {
+          "id": "todo-03",
+          "text": "Prenotare appuntamento al centro vaccinazioni",
+          "note": "Alcune vaccinazioni richiedono più dosi nel tempo",
+          "priority": "urgent"
+        },
+        {
+          "id": "todo-04",
+          "text": "Contattare il noleggiatore e fare le domande chiave",
+          "note": "Candela, passo catena, attrezzi inclusi, camera o tubeless, assicurazione Tajikistan",
+          "priority": "high"
+        },
+        {
+          "id": "todo-23",
+          "text": "Contattare Erali per GBAO Permit",
+          "note": "WhatsApp +996 707 760 657 · parla inglese · consigliato da Jake",
+          "priority": "urgent"
+        },
+        {
+          "id": "todo-24",
+          "text": "Confermare power of attorney con Jake ($20 × 2 moto)",
+          "note": "Necessario per portare le moto in Tajikistan",
+          "priority": "high"
+        },
+        {
+          "id": "todo-25",
+          "text": "Decidere se attivare assicurazione danni moto Jake",
+          "note": "$15/giorno a moto — per 17 giorni = ~$510 totale per entrambe",
+          "priority": "high"
+        }
       ]
     },
     {
       "id": "todo2",
       "week": "Settimana 2 — Salute e sicurezza",
       "items": [
-        { "id": "todo-05", "text": "Visita travel medicine + vaccinazioni", "note": "Epatite A/B, tifoide, tetano, rabbia (pre-esposizione per cani randagi)", "priority": "high" },
-        { "id": "todo-06", "text": "Ottenere Diamox (Acetazolamide) con ricetta", "note": "Fondamentale per il mal di montagna a 4.000m+", "priority": "high" },
-        { "id": "todo-07", "text": "Attivare assicurazione sanitaria con copertura rimpatrio", "note": "Verificare che copra alta quota e attività moto", "priority": "high" },
-        { "id": "todo-08", "text": "Farsi prescrivere antibiotici ad ampio spettro", "priority": "high" }
+        {
+          "id": "todo-05",
+          "text": "Visita travel medicine + vaccinazioni",
+          "note": "Epatite A/B, tifoide, tetano, rabbia (pre-esposizione per cani randagi)",
+          "priority": "high"
+        },
+        {
+          "id": "todo-06",
+          "text": "Ottenere Diamox (Acetazolamide) con ricetta",
+          "note": "Fondamentale per il mal di montagna a 4.000m+",
+          "priority": "high"
+        },
+        {
+          "id": "todo-07",
+          "text": "Attivare assicurazione sanitaria con copertura rimpatrio",
+          "note": "Verificare che copra alta quota e attività moto",
+          "priority": "high"
+        },
+        {
+          "id": "todo-08",
+          "text": "Farsi prescrivere antibiotici ad ampio spettro",
+          "priority": "high"
+        }
       ]
     },
     {
       "id": "todo3",
       "week": "Settimana 3 — Equipment e navigazione",
       "items": [
-        { "id": "todo-09", "text": "Comprare i ricambi specifici XT 600", "note": "Candele NGK DR8EA, maglie catena 520, cavi, leve", "priority": "high" },
-        { "id": "todo-10", "text": "Scaricare OsmAnd + mappe offline", "note": "Kyrgyzstan e Tajikistan — testare che funzionino offline", "priority": "high" },
-        { "id": "todo-11", "text": "Scaricare iOverlander e salvare punti chiave", "note": "Benzina, lodge, campeggi, meccanici lungo la M41", "priority": "normal" },
-        { "id": "todo-12", "text": "Procurarsi/attivare Garmin inReach Mini", "note": "~350€ + abbonamento mensile ~15-35€", "priority": "normal" },
-        { "id": "todo-13", "text": "Comprare supporto manubrio impermeabile per smartphone", "priority": "normal" }
+        {
+          "id": "todo-09",
+          "text": "Comprare i ricambi specifici XT 600",
+          "note": "Candele NGK DR8EA, maglie catena 520, cavi, leve",
+          "priority": "high"
+        },
+        {
+          "id": "todo-10",
+          "text": "Scaricare OsmAnd + mappe offline",
+          "note": "Kyrgyzstan e Tajikistan — testare che funzionino offline",
+          "priority": "high"
+        },
+        {
+          "id": "todo-11",
+          "text": "Scaricare iOverlander e salvare punti chiave",
+          "note": "Benzina, lodge, campeggi, meccanici lungo la M41",
+          "priority": "normal"
+        },
+        {
+          "id": "todo-12",
+          "text": "Procurarsi/attivare Garmin inReach Mini",
+          "note": "~350€ + abbonamento mensile ~15-35€",
+          "priority": "normal"
+        },
+        {
+          "id": "todo-13",
+          "text": "Comprare supporto manubrio impermeabile per smartphone",
+          "priority": "normal"
+        }
       ]
     },
     {
       "id": "todo4",
       "week": "Settimana 4 — Logistica finale",
       "items": [
-        { "id": "todo-14", "text": "Cambiare USD cash", "note": "Banconote nuove, non strappate — le vecchie non vengono accettate", "priority": "high" },
-        { "id": "todo-15", "text": "Definire itinerario con tappe e distanze realistiche", "note": "17 giorni: Osh → Samarcanda → Dushanbe → Wakhan → Murghab → Osh", "priority": "high" },
-        { "id": "todo-16", "text": "Lasciare itinerario e contatti a qualcuno in Italia", "note": "Con date check-in previste", "priority": "normal" },
-        { "id": "todo-17", "text": "Acquistare SIM locale o verificare piano roaming", "priority": "normal" },
-        { "id": "todo-18", "text": "Giro di prova 30-40km con moto a pieno carico", "note": "Da fare ad Osh prima di partire", "priority": "normal" },
-        { "id": "todo-19", "text": "Caricare copie digitali di tutti i documenti su cloud", "priority": "normal" },
-        { "id": "todo-20", "text": "Ordinare cartina cartacea Reise Know-How Asia Centrale", "note": "Su Amazon — Google Maps non è sufficiente in zona remota", "priority": "high" },
-        { "id": "todo-21", "text": "Verificare stato strade prima della partenza", "note": "Chiedere a Dushanbe — frane e nevicate cambiano i percorsi ogni anno", "priority": "normal" },
-        { "id": "todo-22", "text": "Confermare percorso Dushanbe → Khorog via sud (Kulob)", "note": "Più sicuro e in condizioni migliori rispetto alla via nord", "priority": "normal" }
+        {
+          "id": "todo-14",
+          "text": "Cambiare USD cash",
+          "note": "Banconote nuove, non strappate — le vecchie non vengono accettate",
+          "priority": "high"
+        },
+        {
+          "id": "todo-15",
+          "text": "Definire itinerario con tappe e distanze realistiche",
+          "note": "17 giorni: Osh → Samarcanda → Dushanbe → Wakhan → Murghab → Osh",
+          "priority": "high"
+        },
+        {
+          "id": "todo-16",
+          "text": "Lasciare itinerario e contatti a qualcuno in Italia",
+          "note": "Con date check-in previste",
+          "priority": "normal"
+        },
+        {
+          "id": "todo-17",
+          "text": "Acquistare SIM locale o verificare piano roaming",
+          "priority": "normal"
+        },
+        {
+          "id": "todo-18",
+          "text": "Giro di prova 30-40km con moto a pieno carico",
+          "note": "Da fare ad Osh prima di partire",
+          "priority": "normal"
+        },
+        {
+          "id": "todo-19",
+          "text": "Caricare copie digitali di tutti i documenti su cloud",
+          "priority": "normal"
+        },
+        {
+          "id": "todo-20",
+          "text": "Ordinare cartina cartacea Reise Know-How Asia Centrale",
+          "note": "Su Amazon — Google Maps non è sufficiente in zona remota",
+          "priority": "high"
+        },
+        {
+          "id": "todo-21",
+          "text": "Verificare stato strade prima della partenza",
+          "note": "Chiedere a Dushanbe — frane e nevicate cambiano i percorsi ogni anno",
+          "priority": "normal"
+        },
+        {
+          "id": "todo-22",
+          "text": "Confermare percorso Dushanbe → Khorog via sud (Kulob)",
+          "note": "Più sicuro e in condizioni migliori rispetto alla via nord",
+          "priority": "normal"
+        }
       ]
     }
   ]
